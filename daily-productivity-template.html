@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Productivity Planner — Premium Template</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141210;
+    --paper: #fdfbf7;
+    --cream: #f5f0e8;
+    --accent: #2d5a3d;
+    --accent-light: #ddeae1;
+    --warm: #c07840;
+    --muted: #7a746c;
+    --line: #ddd8ce;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Epilogue', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #e8e3da;
+    font-family: var(--sans);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 48px 20px;
+  }
+
+  /* Outer wrapper with subtle shadow stack */
+  .wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Product badge above page */
+  .product-badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 0 4px;
+  }
+
+  .badge-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .badge-text {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .badge-price {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.04),
+      0 8px 24px rgba(0,0,0,0.08),
+      0 24px 64px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Top stripe */
+  .top-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--warm) 100%);
+  }
+
+  /* Header */
+  .header {
+    padding: 52px 60px 44px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  /* Geometric background detail */
+  .header::after {
+    content: '';
+    position: absolute;
+    right: 60px; top: 40px;
+    width: 180px; height: 180px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    right: 90px; top: 70px;
+    width: 120px; height: 120px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .header-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .header-title {
+    font-family: var(--serif);
+    font-size: 52px;
+    line-height: 1.0;
+    color: var(--ink);
+    max-width: 460px;
+  }
+
+  .header-title em {
+    color: var(--warm);
+    font-style: italic;
+  }
+
+  .header-sub {
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 360px;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  /* Hero goal — full bleed dark band */
+  .goal-band {
+    background: var(--ink);
+    padding: 32px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .goal-band::before {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,120,64,0.12) 0%, transparent 70%);
+  }
+
+  .goal-eyebrow {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .goal-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    max-width: 60px;
+    background: rgba(192,120,64,0.3);
+  }
+
+  .goal-prompt {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(253,251,247,0.5);
+    margin-bottom: 10px;
+  }
+
+  .goal-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    background: transparent;
+    font-family: var(--serif);
+    font-size: 26px;
+    color: var(--paper);
+    padding: 10px 0 12px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .goal-input::placeholder { color: rgba(253,251,247,0.2); }
+  .goal-input:focus { border-bottom-color: var(--warm); }
+
+  /* Progress row */
+  .progress-row {
+    padding: 14px 60px;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .progress-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--warm));
+    width: 0%;
+    transition: width 0.4s ease;
+    border-radius: 2px;
+  }
+
+  .progress-pct {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--accent);
+    font-style: italic;
+    width: 32px;
+    text-align: right;
+  }
+
+  /* Body grid */
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .col-left {
+    border-right: 1px solid var(--line);
+    padding: 40px 44px 40px 60px;
+  }
+
+  .col-right {
+    padding: 40px 60px 40px 44px;
+  }
+
+  /* Section */
+  .section { margin-bottom: 34px; }
+  .section:last-child { margin-bottom: 0; }
+
+  .section-label {
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--accent-light);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  /* Priorities */
+  .priority-item {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .priority-num {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--warm);
+    line-height: 1;
+  }
+
+  .line-input {
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink);
+    padding: 6px 0;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+
+  .line-input:focus { border-bottom-color: var(--accent); }
+  .line-input::placeholder { color: var(--line); }
+
+  /* Time blocks */
+  .time-row {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .time-tag {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .time-input {
+    border: none;
+    background: transparent;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+    width: 100%;
+    padding: 2px 0;
+  }
+
+  .time-input::placeholder { color: var(--line); }
+
+  /* Energy */
+  .energy-wrap {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .energy-cap {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .energy-dots {
+    display: flex;
+    gap: 7px;
+  }
+
+  .e-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .e-dot:hover { border-color: var(--accent); }
+  .e-dot.on { background: var(--accent); border-color: var(--accent); }
+  .e-dot[data-l="1"].on { background: #b8d4be; border-color: #b8d4be; }
+  .e-dot[data-l="2"].on { background: #7aad88; border-color: #7aad88; }
+  .e-dot[data-l="3"].on { background: var(--accent); border-color: var(--accent); }
+  .e-dot[data-l="4"].on { background: #1f4a2d; border-color: #1f4a2d; }
+  .e-dot[data-l="5"].on { background: var(--ink); border-color: var(--ink); }
+
+  /* Tasks */
+  .task-list { display: flex; flex-direction: column; gap: 11px; }
+
+  .task-item {
+    display: grid;
+    grid-template-columns: 17px 1fr;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .t-check {
+    width: 17px; height: 17px;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .t-check.on {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .t-check.on::after {
+    content: '';
+    position: absolute;
+    left: 3px; top: 1px;
+    width: 7px; height: 10px;
+    border: 2px solid white;
+    border-top: none; border-left: none;
+    transform: rotate(40deg);
+  }
+
+  .t-input {
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink);
+    padding: 5px 0;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s, opacity 0.2s;
+  }
+
+  .t-input:focus { border-bottom-color: var(--accent); }
+  .t-input::placeholder { color: var(--line); }
+  .t-input.done { text-decoration: line-through; opacity: 0.4; }
+
+  /* Distractions */
+  .distraction-input {
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink);
+    padding: 6px 0;
+    outline: none;
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .distraction-input:focus { border-bottom-color: var(--accent); }
+  .distraction-input::placeholder { color: var(--line); }
+
+  /* Reflection */
+  .reflection-q {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .reflection-area {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--cream);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink);
+    padding: 10px 12px;
+    outline: none;
+    resize: none;
+    height: 70px;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .reflection-area:focus { border-color: var(--accent); }
+  .reflection-area::placeholder { color: var(--line); }
+
+  /* Divider */
+  .sep {
+    height: 1px;
+    background: var(--line);
+    margin: 0 0 28px;
+  }
+
+  /* Tips */
+  .tips {
+    border-top: 1px solid var(--line);
+    background: var(--cream);
+    padding: 26px 60px;
+  }
+
+  .tips-head {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .tip {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .tip-n {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--warm);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .tip-t {
+    font-size: 11px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  /* CTA Footer */
+  .footer {
+    background: var(--accent);
+    padding: 32px 60px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer-eyebrow {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+  }
+
+  .footer-headline {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: white;
+    line-height: 1.2;
+  }
+
+  .footer-headline em {
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .cta-btn {
+    background: white;
+    color: var(--accent);
+    border: none;
+    padding: 15px 32px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border-radius: 1px;
+  }
+
+  .cta-btn:hover {
+    background: var(--paper);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .cta-btn:active { transform: none; }
+
+  .cta-note {
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+  }
+
+  /* Bottom strip */
+  .bottom-strip {
+    padding: 16px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line);
+  }
+
+  .strip-brand {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .strip-url {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  @media print {
+    body { padding: 0; background: white; }
+    .page { box-shadow: none; }
+    .footer, .top-stripe, .goal-band {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="product-badge">
+    <div class="badge-left">
+      <div class="badge-dot"></div>
+      <span class="badge-text">Premium Digital Template</span>
+    </div>
+    <span class="badge-price">Instant Download · PDF + Fillable HTML</span>
+  </div>
+
+  <div class="page">
+
+    <div class="top-stripe"></div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-eyebrow">Daily Productivity System</div>
+      <h1 class="header-title">
+        Build the day<br>that <em>wins.</em>
+      </h1>
+      <p class="header-sub">A complete framework for peak performers. Plan with intention, protect deep work, and close every day with clarity.</p>
+    </div>
+
+    <!-- North Star Goal -->
+    <div class="goal-band">
+      <div class="goal-eyebrow">★ &nbsp;Your North Star</div>
+      <div class="goal-prompt">The single outcome that makes today a success:</div>
+      <input class="goal-input" type="text" placeholder="Write it here…">
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-row">
+      <span class="progress-label">Day Completion</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span class="progress-pct" id="progressPct">0%</span>
+    </div>
+
+    <!-- Body -->
+    <div class="body">
+
+      <div class="col-left">
+
+        <!-- Priorities -->
+        <div class="section">
+          <div class="section-label">Top Priorities</div>
+          <div class="section-title">High-ROI Tasks</div>
+          <div class="priority-item">
+            <div class="priority-num">1</div>
+            <input class="line-input" type="text" placeholder="Most important task…">
+          </div>
+          <div class="priority-item">
+            <div class="priority-num">2</div>
+            <input class="line-input" type="text" placeholder="Second priority…">
+          </div>
+          <div class="priority-item">
+            <div class="priority-num">3</div>
+            <input class="line-input" type="text" placeholder="Third priority…">
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <!-- Time Blocks -->
+        <div class="section">
+          <div class="section-label">Time Blocks</div>
+          <div class="section-title">Schedule Your Hours</div>
+          <div class="time-row"><span class="time-tag">6–9 AM</span><input class="time-input" type="text" placeholder="Morning routine…"></div>
+          <div class="time-row"><span class="time-tag">9–12 PM</span><input class="time-input" type="text" placeholder="Deep work…"></div>
+          <div class="time-row"><span class="time-tag">12–3 PM</span><input class="time-input" type="text" placeholder="Meetings / calls…"></div>
+          <div class="time-row"><span class="time-tag">3–6 PM</span><input class="time-input" type="text" placeholder="Admin / review…"></div>
+          <div class="time-row"><span class="time-tag">6–9 PM</span><input class="time-input" type="text" placeholder="Wind down…"></div>
+        </div>
+
+        <!-- Energy -->
+        <div class="energy-wrap" style="margin-top:24px;">
+          <div class="section-label" style="margin:0; flex:none;">Energy</div>
+          <span class="energy-cap">Low</span>
+          <div class="energy-dots" id="eDots">
+            <div class="e-dot" data-l="1"></div>
+            <div class="e-dot" data-l="2"></div>
+            <div class="e-dot" data-l="3"></div>
+            <div class="e-dot" data-l="4"></div>
+            <div class="e-dot" data-l="5"></div>
+          </div>
+          <span class="energy-cap">High</span>
+        </div>
+
+      </div>
+
+      <div class="col-right">
+
+        <!-- Tasks -->
+        <div class="section">
+          <div class="section-label">Task List</div>
+          <div class="section-title">Get It Done</div>
+          <div class="task-list" id="taskList"></div>
+        </div>
+
+        <div class="sep"></div>
+
+        <!-- Distractions -->
+        <div class="section">
+          <div class="section-label">Distraction Guard</div>
+          <div class="section-title">Protect Your Focus</div>
+          <input class="distraction-input" type="text" placeholder="Distraction to avoid #1…">
+          <input class="distraction-input" type="text" placeholder="Distraction to avoid #2…">
+          <input class="distraction-input" type="text" placeholder="Distraction to avoid #3…">
+        </div>
+
+        <div class="sep"></div>
+
+        <!-- Reflection -->
+        <div class="section">
+          <div class="section-label">End-of-Day Reflection</div>
+          <div class="section-title">Close Strong</div>
+          <div class="reflection-q">What went well today?</div>
+          <textarea class="reflection-area" placeholder="Wins, breakthroughs, moments of flow…"></textarea>
+          <div class="reflection-q">What will you do differently tomorrow?</div>
+          <textarea class="reflection-area" placeholder="One clear, specific change…"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips">
+      <div class="tips-head">Productivity Principles Included in This System</div>
+      <div class="tips-grid">
+        <div class="tip"><div class="tip-n">1</div><div class="tip-t">Complete your highest-ROI tasks before noon when cognitive power peaks.</div></div>
+        <div class="tip"><div class="tip-n">2</div><div class="tip-t">Work in 25–50 min focused sessions. Breaks are part of the method.</div></div>
+        <div class="tip"><div class="tip-n">3</div><div class="tip-t">Block time on your calendar — treat it as a non-negotiable meeting.</div></div>
+        <div class="tip"><div class="tip-n">4</div><div class="tip-t">Turn off all notifications during deep work. One ping costs 23 minutes.</div></div>
+        <div class="tip"><div class="tip-n">5</div><div class="tip-t">A 5-minute end-of-day review compounds to 50+ hours saved per year.</div></div>
+        <div class="tip"><div class="tip-n">6</div><div class="tip-t">Track where your time goes for one week. The data always surprises.</div></div>
+      </div>
+    </div>
+
+    <!-- CTA Footer -->
+    <div class="footer">
+      <div>
+        <div class="footer-eyebrow">Upgrade Your System</div>
+        <div class="footer-headline">Get the full 30-day<br><em>planner bundle.</em></div>
+      </div>
+      <div class="cta-group">
+        <button class="cta-btn" onclick="handleCTA()">Buy Now — $19 →</button>
+        <span class="cta-note">Instant download · No subscription</span>
+      </div>
+    </div>
+
+    <!-- Bottom strip -->
+    <div class="bottom-strip">
+      <span class="strip-brand">Daily Productivity System</span>
+      <span class="strip-url">yoursite.com/planner</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Tasks
+  const placeholders = [
+    'Priority action item…',
+    'Follow-up needed…',
+    'Quick win (< 5 min)…',
+    'Delegatable task…',
+    'Long-term project step…',
+    'Admin / maintenance…',
+  ];
+
+  const list = document.getElementById('taskList');
+  placeholders.forEach((ph, i) => {
+    const div = document.createElement('div');
+    div.className = 'task-item';
+    div.innerHTML = `<div class="t-check" data-i="${i}"></div><input class="t-input" type="text" placeholder="${ph}">`;
+    list.appendChild(div);
+  });
+
+  // Checkboxes
+  document.addEventListener('click', e => {
+    if (!e.target.classList.contains('t-check')) return;
+    e.target.classList.toggle('on');
+    e.target.nextElementSibling.classList.toggle('done');
+    updateProgress();
+  });
+
+  function updateProgress() {
+    const total = document.querySelectorAll('.t-check').length;
+    const done = document.querySelectorAll('.t-check.on').length;
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  // Energy
+  document.getElementById('eDots').addEventListener('click', e => {
+    if (!e.target.classList.contains('e-dot')) return;
+    const lvl = parseInt(e.target.dataset.l);
+    document.querySelectorAll('.e-dot').forEach(d => {
+      d.classList.toggle('on', parseInt(d.dataset.l) <= lvl);
+    });
+  });
+
+  // CTA
+  function handleCTA() {
+    const btn = document.querySelector('.cta-btn');
+    btn.textContent = '✓ Redirecting…';
+    setTimeout(() => { btn.textContent = 'Buy Now — $19 →'; }, 2500);
+  }
+</script>
+</body>
+</html>
